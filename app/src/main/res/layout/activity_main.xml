@@ -30,28 +30,28 @@
         app:layout_constraintVertical_bias="0.441" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/edMin"
         android:layout_width="154dp"
         android:layout_height="39dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/tv"
-        app:layout_constraintEnd_toStartOf="@+id/editTextText3"
+        app:layout_constraintEnd_toStartOf="@+id/edMax"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextText3"
+        android:id="@+id/edMax"
         android:layout_width="154dp"
         android:layout_height="39dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextText"
+        app:layout_constraintBottom_toBottomOf="@+id/edMin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/editTextText"
-        app:layout_constraintTop_toTopOf="@+id/editTextText"
+        app:layout_constraintStart_toEndOf="@+id/edMin"
+        app:layout_constraintTop_toTopOf="@+id/edMin"
         app:layout_constraintVertical_bias="0.501" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
