@@ -31,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
         b.setOnClickListener(v -> {
 
             contador++;
-            textView.setText(Integer.toString(contador));
+            Random random = new Random();
+            int r=random.nextInt(100);
+            textView.setText(Integer.toString(r));
             b.setText("Blá");
 
         });
