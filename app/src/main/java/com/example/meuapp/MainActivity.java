@@ -18,11 +18,13 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageView;
 
     Integer imagens[] = new Integer[]{
-            R.drawable.cachorro,
-            R.drawable.gardem,
-            R.drawable.patinho,
-            R.drawable.happy,
-            R.drawable.porquinho
+            R.drawable.perfil,
+            R.drawable.abaixopeso,
+            R.drawable.normal,
+            R.drawable.obesidade1,
+            R.drawable.obesidade2,
+            R.drawable.obesidade3,
+            R.drawable.sobrepeso,
     };
 
     int posicao = 0;
