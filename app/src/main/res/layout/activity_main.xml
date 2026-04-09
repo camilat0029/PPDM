@@ -11,8 +11,10 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="367dp"
+        app:layout_constraintBottom_toTopOf="@+id/Imc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCalcular"
         tools:srcCompat="@tools:sample/avatars" />
 
     <EditText
@@ -20,39 +22,79 @@
         android:layout_width="162dp"
         android:layout_height="42dp"
         android:ems="10"
+        android:hint="Peso(kg)"
         android:inputType="number|numberDecimal"
-        android:text="Peso"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCalcular"
         app:layout_constraintEnd_toStartOf="@+id/Altura"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="144dp" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPeso" />
 
     <EditText
         android:id="@+id/Altura"
         android:layout_width="162dp"
         android:layout_height="42dp"
         android:ems="10"
+        android:hint="Altura(m)"
         android:inputType="number|numberDecimal"
-        android:text="Altura"
+        app:layout_constraintBottom_toBottomOf="@+id/Peso"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/Peso"
-        tools:layout_editor_absoluteY="144dp" />
+        app:layout_constraintTop_toTopOf="@+id/Peso" />
 
     <TextView
         android:id="@+id/Imc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="IMC"
-        tools:layout_editor_absoluteX="191dp"
-        tools:layout_editor_absoluteY="601dp" />
+        app:layout_constraintBottom_toTopOf="@+id/tvClassificacao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/buttonCalcular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Calcular"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="256dp" />
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Peso" />
+
+    <TextView
+        android:id="@+id/tvPeso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Peso"
+        app:layout_constraintBottom_toTopOf="@+id/Peso"
+        app:layout_constraintEnd_toStartOf="@+id/tvAltura"
+        app:layout_constraintHorizontal_bias="0.436"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tvAltura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:text="Altura"
+        app:layout_constraintBottom_toTopOf="@+id/Altura"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.754"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvPeso" />
+
+    <TextView
+        android:id="@+id/tvClassificacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Classificação"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Imc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

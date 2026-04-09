@@ -10,25 +10,29 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button bntAvancar, bntVoltar;
+    Button bntCalcularImc;
     ImageView imageView;
+
+    EditText peso, altura;
+
+    TextView imcFinal, imcClassificacao;
+
+    Double imc, pesoF, alturaF;
 
     Integer imagens[] = new Integer[]{
             R.drawable.perfil,
             R.drawable.abaixopeso,
             R.drawable.normal,
+            R.drawable.sobrepeso,
             R.drawable.obesidade1,
             R.drawable.obesidade2,
             R.drawable.obesidade3,
-            R.drawable.sobrepeso,
     };
-
-    int posicao = 0;
-
 
 
     @SuppressLint("MissingInflatedId")
@@ -38,33 +42,66 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        bntVoltar=findViewById(R.id.buttonVoltar);
-        bntAvancar=findViewById(R.id.buttonAvancar);
+        bntCalcularImc=findViewById(R.id.buttonCalcular);
+        peso=findViewById(R.id.Peso);
+        altura=findViewById(R.id.Altura);
+        imcFinal=findViewById(R.id.Imc);
+        imcClassificacao=findViewById(R.id.tvClassificacao);
         imageView=findViewById(R.id.imageView);
 
-        imageView.setImageResource(imagens[posicao]);
+        imageView.setImageResource(imagens[0]);
 
-        bntAvancar.setOnClickListener(v -> {
+        bntCalcularImc.setOnClickListener(v -> {
 
-            if (posicao==imagens.length-1){
-                posicao=0;
-            } else{
-                posicao++;
+
+            String alturaS = altura.getText().toString();
+            String pesoS = peso.getText().toString();
+
+            if(alturaS.isEmpty()){
+                altura.setError("Informe um valor Minimo");
+                altura.requestFocus();
+                return;
             }
 
-            imageView.setImageResource(imagens[posicao]);
+            if (pesoS.isEmpty()){
+                peso.setError("Informe um valor Minimo");
+                peso.requestFocus();
+                return;
+            }
+
+            alturaF = Double.parseDouble(alturaS);
+            pesoF = Double.parseDouble(pesoS);
+
+            imc = (pesoF/(alturaF*alturaF));
+            DecimalFormat dc = new DecimalFormat("##.##");
+
+            if(imc < 18.5){
+                imageView.setImageResource(imagens[1]);
+                imcFinal.setText("IMC = " + dc.format(imc));
+                imcClassificacao.setText("Classificação = Abaixo do Peso");
+            } else if(imc >= 18.5 && imc < 24.9){
+                imageView.setImageResource(imagens[2]);
+                imcFinal.setText("IMC = " + dc.format(imc));
+                imcClassificacao.setText("Classificação = Normal");
+            } else if(imc >= 25 && imc < 29.9){
+                imageView.setImageResource(imagens[3]);
+                imcFinal.setText("IMC = " + dc.format(imc));
+                imcClassificacao.setText("Classificação = Sobrepeso");
+            } else if(imc >= 30 && imc < 34.9){
+                imageView.setImageResource(imagens[4]);
+                imcFinal.setText("IMC = " + dc.format(imc));
+                imcClassificacao.setText("Classificação = Obesidade grau 1");
+            } else if(imc >= 35 && imc < 39.9){
+                imageView.setImageResource(imagens[5]);
+                imcFinal.setText("IMC = " + dc.format(imc));
+                imcClassificacao.setText("Classificação = Obesidade grau 2");
+            } else if(imc >= 40){
+                imageView.setImageResource(imagens[6]);
+                imcFinal.setText("IMC = " + dc.format(imc));
+                imcClassificacao.setText("Classificação = Obesidade grau 3");
+            }
 
         });
 
-        bntVoltar.setOnClickListener(v -> {
-
-            posicao--;
-
-            if (posicao<0) {
-                posicao=imagens.length-1;
-            }
-
-            imageView.setImageResource(imagens[posicao]);
-        });
     }
 }
