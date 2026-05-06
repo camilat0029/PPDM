@@ -27,6 +27,7 @@ public class AdapterPlaneta extends ArrayAdapter<Planeta> {
 
         //Inflar o Layout xml
         LayoutInflater inflater = LayoutInflater.from(lcontext);
+        View itemView=inflater.inflate(R.layout.item_lista,parent);
 
         return super.getView(position, convertView, parent);
     }
