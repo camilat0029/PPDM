@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -24,26 +26,51 @@ public class MainActivity extends AppCompatActivity {
 
     SQLiteDatabase sqlite;
 
+    ImageButton buttonSalvar;
+
+    EditText edtText;
+
+    ArrayAdapter<String> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        //Inicializar o banco de dados ou abrir caso o mesmo não exista
         sqlite = openOrCreateDatabase("notas", MODE_PRIVATE, null);
 
+        //Criando tabela notas
         sqlite.execSQL("CREATE TABLE IF NOT EXISTS notas (id INTEGER PRIMARY KEY AUTOINCREMENT, titulo TEXT, nota TEXT)");
 
         //String titulo = "João";
         //sqlite.execSQL("INSERT INTO notas VALUES(1,'"+titulo+"', '')");
 
+        //Inserindo dados no banco de dados
         /* nomeColuna, valor*/
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("titulo", "João");
-        contentValues.put("nota", "7777777777");
-        ListView lv =findViewById(R.id.listView);
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put("titulo", "João");
+//        contentValues.put("nota", "7777777777");
+        ListView lv = findViewById(R.id.listView);
+        buttonSalvar = findViewById(R.id.imageButton2);
+        edtText = findViewById(R.id.editTextText);
 
-        sqlite.insert("notas", null, contentValues);
+        //tratamento do botão
+        buttonSalvar.setOnClickListener(v ->{
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("titulo", edtText.getText().toString());
+            contentValues.put("nota", edtText.getText().toString());
+            sqlite.insert("notas", null, contentValues);
+            listagem();
+        });
 
+        //Para aparecer desde que a atividade começar
+        listagem();
+
+    }
+
+    public void listagem(){
         //Recuperar dados do sqlite
         Cursor c =sqlite.rawQuery("SELECT id,id*10,titulo,nota FROM notas", null);
         c.moveToFirst(); //Movimenta o ponteiro do cursor para o primeiro registro recuperado
@@ -63,9 +90,8 @@ public class MainActivity extends AppCompatActivity {
         for(Nota nota :listaNotas){
             listaTitulos.add(nota.titulo);
         }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, listaTitulos);
+        ListView lv = findViewById(R.id.listView);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, listaTitulos);
         lv.setAdapter(adapter);
-
     }
 }
